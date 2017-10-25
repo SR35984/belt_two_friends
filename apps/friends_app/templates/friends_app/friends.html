@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Friends Page</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+	 crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+	 crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+	 crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+	 crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<div class="wrapper">
+		<p class="nav">
+			<a href="{% url 'logout' %}">Logout</a>
+		</p>
+		<h1>Hello, {{ user.name }}!</h1>
+		<div class="container">
+
+			<h3>Here is the list of your friends:</h3>
+			{% for friend in friends %}
+			<table class="table table-striped">
+				{% csrf_token %}
+				<thead>
+					<tr>
+						<th>Alias</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{ friend.alias }}</td>
+						<td><a href='/showuser/{{friend.id}}'>View Profile</a> <a href='/remfriend'>Remove as Friend</a></td>
+					</tr>
+				</tbody>
+			</table>
+			{% endfor %}
+			<hr>
+
+			<h3>Other Users not on your friend's list:</h3>
+			{% for friend in nonfriends %}
+			<table class="table table-striped">
+				{% csrf_token %}
+				<thead>
+					<tr>
+						<th>Alias</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><a href='/showuser/{{friend.id}}'>{{ friend.alias }}</a></td>
+						<td><a href='/addfriend'<button type="submit">Add as Friend</button></a></td>
+					</tr>
+				</tbody>
+			</table>
+			{% endfor %}
+		</div>
+	</div>
+</body>
+
+</html>

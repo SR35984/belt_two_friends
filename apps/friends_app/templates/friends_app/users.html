@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Users Page</title>
+</head>
+<body>
+	<div class="wrapper">
+		<p class="nav">
+			<a href="{% url 'dashboard' %}">Home</a>
+			<a href="{% url 'logout' %}">Logout</a>
+		</p>
+		<h1>{{ user.name }}'s Profile</h1>
+		<p>Name: {{ user.name }}</p>
+		<p>Email Address: {{ user.email }}</p>
+
+	</div>
+</body>
+</html>
